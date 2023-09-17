@@ -7,17 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE227E662AB0651B00C92D26 /* MovieFilmFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE227E652AB0651B00C92D26 /* MovieFilmFeature.swift */; };
+		AE43EB742AAF06FE004AE02A /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE43EB732AAF06FE004AE02A /* FilmView.swift */; };
+		AE759ED52AB1F9A80090C60B /* Josun.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE759ED42AB1F9A80090C60B /* Josun.ttf */; };
+		AE759ED72AB1FA070090C60B /* Hakgo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE759ED62AB1FA070090C60B /* Hakgo.ttf */; };
+		AEA6B21A2AB310EB00C96E0F /* NanumGothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEA6B2192AB310EB00C96E0F /* NanumGothic.ttf */; };
+		AEA6B21C2AB311DA00C96E0F /* FilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA6B21B2AB311DA00C96E0F /* FilterList.swift */; };
+		AEB333A72AB5E6E30058D334 /* FilmViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333A62AB5E6E30058D334 /* FilmViewFeature.swift */; };
+		AEB333A92AB5E71A0058D334 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333A82AB5E71A0058D334 /* MainView.swift */; };
+		AEB333AB2AB5E8520058D334 /* MainViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333AA2AB5E8520058D334 /* MainViewFeature.swift */; };
+		AEB333AD2AB607FD0058D334 /* MovieFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333AC2AB607FD0058D334 /* MovieFilmView.swift */; };
+		AEB333AF2AB608830058D334 /* EditFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333AE2AB608830058D334 /* EditFilmView.swift */; };
 		AEBA39482AAF017E00658F1A /* C_PurpleFilmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBA39472AAF017E00658F1A /* C_PurpleFilmApp.swift */; };
-		AEBA394A2AAF017E00658F1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBA39492AAF017E00658F1A /* ContentView.swift */; };
 		AEBA394C2AAF017F00658F1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEBA394B2AAF017F00658F1A /* Assets.xcassets */; };
 		AEBA394F2AAF017F00658F1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEBA394E2AAF017F00658F1A /* Preview Assets.xcassets */; };
 		AEBA39572AAF02D200658F1A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AEBA39562AAF02D200658F1A /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE227E652AB0651B00C92D26 /* MovieFilmFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilmFeature.swift; sourceTree = "<group>"; };
+		AE43EB732AAF06FE004AE02A /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
+		AE7240762AB1687B0077D83E /* C-PurpleFilm-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "C-PurpleFilm-Info.plist"; sourceTree = SOURCE_ROOT; };
+		AE759ED42AB1F9A80090C60B /* Josun.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Josun.ttf; sourceTree = "<group>"; };
+		AE759ED62AB1FA070090C60B /* Hakgo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hakgo.ttf; sourceTree = "<group>"; };
+		AEA6B2192AB310EB00C96E0F /* NanumGothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumGothic.ttf; sourceTree = "<group>"; };
+		AEA6B21B2AB311DA00C96E0F /* FilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterList.swift; sourceTree = "<group>"; };
+		AEB333A62AB5E6E30058D334 /* FilmViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmViewFeature.swift; sourceTree = "<group>"; };
+		AEB333A82AB5E71A0058D334 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		AEB333AA2AB5E8520058D334 /* MainViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewFeature.swift; sourceTree = "<group>"; };
+		AEB333AC2AB607FD0058D334 /* MovieFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilmView.swift; sourceTree = "<group>"; };
+		AEB333AE2AB608830058D334 /* EditFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilmView.swift; sourceTree = "<group>"; };
 		AEBA39442AAF017E00658F1A /* C_PurpleFilm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C_PurpleFilm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEBA39472AAF017E00658F1A /* C_PurpleFilmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C_PurpleFilmApp.swift; sourceTree = "<group>"; };
-		AEBA39492AAF017E00658F1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AEBA394B2AAF017F00658F1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AEBA394E2AAF017F00658F1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -34,6 +55,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE7240732AB1682C0077D83E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AE759ED62AB1FA070090C60B /* Hakgo.ttf */,
+				AE759ED42AB1F9A80090C60B /* Josun.ttf */,
+				AEA6B2192AB310EB00C96E0F /* NanumGothic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		AEBA393B2AAF017E00658F1A = {
 			isa = PBXGroup;
 			children = (
@@ -53,9 +84,18 @@
 		AEBA39462AAF017E00658F1A /* C_PurpleFilm */ = {
 			isa = PBXGroup;
 			children = (
-				AEBA39472AAF017E00658F1A /* C_PurpleFilmApp.swift */,
-				AEBA39492AAF017E00658F1A /* ContentView.swift */,
+				AE7240762AB1687B0077D83E /* C-PurpleFilm-Info.plist */,
+				AE7240732AB1682C0077D83E /* Fonts */,
 				AEBA394B2AAF017F00658F1A /* Assets.xcassets */,
+				AEBA39472AAF017E00658F1A /* C_PurpleFilmApp.swift */,
+				AE43EB732AAF06FE004AE02A /* FilmView.swift */,
+				AEB333A62AB5E6E30058D334 /* FilmViewFeature.swift */,
+				AEB333A82AB5E71A0058D334 /* MainView.swift */,
+				AEB333AA2AB5E8520058D334 /* MainViewFeature.swift */,
+				AEB333AC2AB607FD0058D334 /* MovieFilmView.swift */,
+				AE227E652AB0651B00C92D26 /* MovieFilmFeature.swift */,
+				AEA6B21B2AB311DA00C96E0F /* FilterList.swift */,
+				AEB333AE2AB608830058D334 /* EditFilmView.swift */,
 				AEBA394D2AAF017F00658F1A /* Preview Content */,
 			);
 			path = C_PurpleFilm;
@@ -134,7 +174,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEBA394F2AAF017F00658F1A /* Preview Assets.xcassets in Resources */,
+				AE759ED52AB1F9A80090C60B /* Josun.ttf in Resources */,
+				AE759ED72AB1FA070090C60B /* Hakgo.ttf in Resources */,
 				AEBA394C2AAF017F00658F1A /* Assets.xcassets in Resources */,
+				AEA6B21A2AB310EB00C96E0F /* NanumGothic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,8 +188,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEBA394A2AAF017E00658F1A /* ContentView.swift in Sources */,
+				AEB333AF2AB608830058D334 /* EditFilmView.swift in Sources */,
+				AE43EB742AAF06FE004AE02A /* FilmView.swift in Sources */,
+				AEB333AD2AB607FD0058D334 /* MovieFilmView.swift in Sources */,
+				AEB333A72AB5E6E30058D334 /* FilmViewFeature.swift in Sources */,
+				AEA6B21C2AB311DA00C96E0F /* FilterList.swift in Sources */,
+				AEB333AB2AB5E8520058D334 /* MainViewFeature.swift in Sources */,
 				AEBA39482AAF017E00658F1A /* C_PurpleFilmApp.swift in Sources */,
+				AEB333A92AB5E71A0058D334 /* MainView.swift in Sources */,
+				AE227E662AB0651B00C92D26 /* MovieFilmFeature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +328,8 @@
 				DEVELOPMENT_TEAM = SL6KBD5WZW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "C-PurpleFilm-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장용,,";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -307,6 +359,8 @@
 				DEVELOPMENT_TEAM = SL6KBD5WZW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "C-PurpleFilm-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장용,,";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
