@@ -7,11 +7,18 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 @main
 struct C_PurpleFilmApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  static let store = Store(initialState: FilmViewFeature.State()){
+    FilmViewFeature()
+      ._printChanges()
+  }
+  
+  var body: some Scene {
+    WindowGroup {
+      FilmView(store: C_PurpleFilmApp.store)
     }
+  }
 }
