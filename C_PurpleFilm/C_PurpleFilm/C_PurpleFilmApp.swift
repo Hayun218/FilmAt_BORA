@@ -13,7 +13,7 @@ import ComposableArchitecture
 struct C_PurpleFilmApp: App {
   static let store = Store(initialState: FilmViewFeature.State()){
     FilmViewFeature()
-      ._printChanges()
+     // ._printChanges()
   }
   
   var body: some Scene {

@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		AE227E662AB0651B00C92D26 /* MovieFilmFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE227E652AB0651B00C92D26 /* MovieFilmFeature.swift */; };
+		AE280EAC2ABA8D0000BA2196 /* BackImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE280EAB2ABA8D0000BA2196 /* BackImages.swift */; };
+		AE2FD14C2AB97864001BC0C0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2FD14B2AB97864001BC0C0 /* ImagePicker.swift */; };
 		AE43EB742AAF06FE004AE02A /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE43EB732AAF06FE004AE02A /* FilmView.swift */; };
+		AE5EC4272AB7FBF600CF166F /* AdaptsToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC4262AB7FBF600CF166F /* AdaptsToKeyboard.swift */; };
+		AE5EC4292AB8362700CF166F /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC4282AB8362700CF166F /* KeyboardReadable.swift */; };
 		AE759ED52AB1F9A80090C60B /* Josun.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE759ED42AB1F9A80090C60B /* Josun.ttf */; };
 		AE759ED72AB1FA070090C60B /* Hakgo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE759ED62AB1FA070090C60B /* Hakgo.ttf */; };
 		AEA6B21A2AB310EB00C96E0F /* NanumGothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEA6B2192AB310EB00C96E0F /* NanumGothic.ttf */; };
@@ -18,15 +22,25 @@
 		AEB333AB2AB5E8520058D334 /* MainViewFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333AA2AB5E8520058D334 /* MainViewFeature.swift */; };
 		AEB333AD2AB607FD0058D334 /* MovieFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333AC2AB607FD0058D334 /* MovieFilmView.swift */; };
 		AEB333AF2AB608830058D334 /* EditFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333AE2AB608830058D334 /* EditFilmView.swift */; };
+		AEB333B12AB72DB20058D334 /* EditFilmFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB333B02AB72DB20058D334 /* EditFilmFeature.swift */; };
 		AEBA39482AAF017E00658F1A /* C_PurpleFilmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBA39472AAF017E00658F1A /* C_PurpleFilmApp.swift */; };
 		AEBA394C2AAF017F00658F1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEBA394B2AAF017F00658F1A /* Assets.xcassets */; };
 		AEBA394F2AAF017F00658F1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEBA394E2AAF017F00658F1A /* Preview Assets.xcassets */; };
 		AEBA39572AAF02D200658F1A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AEBA39562AAF02D200658F1A /* ComposableArchitecture */; };
+		AEDF00AC2ABAEEB6009C65C3 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDF00AB2ABAEEB6009C65C3 /* Color.swift */; };
+		AEDF00B02ABB3E62009C65C3 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDF00AF2ABB3E62009C65C3 /* RoundedCorner.swift */; };
+		AEDF00B32ABB44DD009C65C3 /* CenterOriginSlider in Frameworks */ = {isa = PBXBuildFile; productRef = AEDF00B22ABB44DD009C65C3 /* CenterOriginSlider */; };
+		AEDF00B52ABB4EAD009C65C3 /* ShapedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDF00B42ABB4EAD009C65C3 /* ShapedViews.swift */; };
+		AEDF00B72ABB57D6009C65C3 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDF00B62ABB57D6009C65C3 /* UIScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AE227E652AB0651B00C92D26 /* MovieFilmFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilmFeature.swift; sourceTree = "<group>"; };
+		AE280EAB2ABA8D0000BA2196 /* BackImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackImages.swift; sourceTree = "<group>"; };
+		AE2FD14B2AB97864001BC0C0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		AE43EB732AAF06FE004AE02A /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
+		AE5EC4262AB7FBF600CF166F /* AdaptsToKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToKeyboard.swift; sourceTree = "<group>"; };
+		AE5EC4282AB8362700CF166F /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		AE7240762AB1687B0077D83E /* C-PurpleFilm-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "C-PurpleFilm-Info.plist"; sourceTree = SOURCE_ROOT; };
 		AE759ED42AB1F9A80090C60B /* Josun.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Josun.ttf; sourceTree = "<group>"; };
 		AE759ED62AB1FA070090C60B /* Hakgo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hakgo.ttf; sourceTree = "<group>"; };
@@ -37,10 +51,15 @@
 		AEB333AA2AB5E8520058D334 /* MainViewFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewFeature.swift; sourceTree = "<group>"; };
 		AEB333AC2AB607FD0058D334 /* MovieFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilmView.swift; sourceTree = "<group>"; };
 		AEB333AE2AB608830058D334 /* EditFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilmView.swift; sourceTree = "<group>"; };
+		AEB333B02AB72DB20058D334 /* EditFilmFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilmFeature.swift; sourceTree = "<group>"; };
 		AEBA39442AAF017E00658F1A /* C_PurpleFilm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C_PurpleFilm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEBA39472AAF017E00658F1A /* C_PurpleFilmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C_PurpleFilmApp.swift; sourceTree = "<group>"; };
 		AEBA394B2AAF017F00658F1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AEBA394E2AAF017F00658F1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AEDF00AB2ABAEEB6009C65C3 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		AEDF00AF2ABB3E62009C65C3 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		AEDF00B42ABB4EAD009C65C3 /* ShapedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapedViews.swift; sourceTree = "<group>"; };
+		AEDF00B62ABB57D6009C65C3 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEDF00B32ABB44DD009C65C3 /* CenterOriginSlider in Frameworks */,
 				AEBA39572AAF02D200658F1A /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,6 +75,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE5EC4252AB7FBEA00CF166F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AE5EC4262AB7FBF600CF166F /* AdaptsToKeyboard.swift */,
+				AE5EC4282AB8362700CF166F /* KeyboardReadable.swift */,
+				AE2FD14B2AB97864001BC0C0 /* ImagePicker.swift */,
+				AEDF00AB2ABAEEB6009C65C3 /* Color.swift */,
+				AEDF00AF2ABB3E62009C65C3 /* RoundedCorner.swift */,
+				AEDF00B42ABB4EAD009C65C3 /* ShapedViews.swift */,
+				AEDF00B62ABB57D6009C65C3 /* UIScreen.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AE7240732AB1682C0077D83E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +118,7 @@
 		AEBA39462AAF017E00658F1A /* C_PurpleFilm */ = {
 			isa = PBXGroup;
 			children = (
+				AE5EC4252AB7FBEA00CF166F /* Extensions */,
 				AE7240762AB1687B0077D83E /* C-PurpleFilm-Info.plist */,
 				AE7240732AB1682C0077D83E /* Fonts */,
 				AEBA394B2AAF017F00658F1A /* Assets.xcassets */,
@@ -96,7 +131,9 @@
 				AE227E652AB0651B00C92D26 /* MovieFilmFeature.swift */,
 				AEA6B21B2AB311DA00C96E0F /* FilterList.swift */,
 				AEB333AE2AB608830058D334 /* EditFilmView.swift */,
+				AEB333B02AB72DB20058D334 /* EditFilmFeature.swift */,
 				AEBA394D2AAF017F00658F1A /* Preview Content */,
+				AE280EAB2ABA8D0000BA2196 /* BackImages.swift */,
 			);
 			path = C_PurpleFilm;
 			sourceTree = "<group>";
@@ -127,6 +164,7 @@
 			name = C_PurpleFilm;
 			packageProductDependencies = (
 				AEBA39562AAF02D200658F1A /* ComposableArchitecture */,
+				AEDF00B22ABB44DD009C65C3 /* CenterOriginSlider */,
 			);
 			productName = C_PurpleFilm;
 			productReference = AEBA39442AAF017E00658F1A /* C_PurpleFilm.app */;
@@ -158,6 +196,7 @@
 			mainGroup = AEBA393B2AAF017E00658F1A;
 			packageReferences = (
 				AEBA39552AAF02D200658F1A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				AEDF00B12ABB44DD009C65C3 /* XCRemoteSwiftPackageReference "CenterOriginSlider" */,
 			);
 			productRefGroup = AEBA39452AAF017E00658F1A /* Products */;
 			projectDirPath = "";
@@ -188,15 +227,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE2FD14C2AB97864001BC0C0 /* ImagePicker.swift in Sources */,
+				AEB333B12AB72DB20058D334 /* EditFilmFeature.swift in Sources */,
 				AEB333AF2AB608830058D334 /* EditFilmView.swift in Sources */,
+				AE5EC4292AB8362700CF166F /* KeyboardReadable.swift in Sources */,
 				AE43EB742AAF06FE004AE02A /* FilmView.swift in Sources */,
 				AEB333AD2AB607FD0058D334 /* MovieFilmView.swift in Sources */,
 				AEB333A72AB5E6E30058D334 /* FilmViewFeature.swift in Sources */,
 				AEA6B21C2AB311DA00C96E0F /* FilterList.swift in Sources */,
+				AEDF00AC2ABAEEB6009C65C3 /* Color.swift in Sources */,
 				AEB333AB2AB5E8520058D334 /* MainViewFeature.swift in Sources */,
 				AEBA39482AAF017E00658F1A /* C_PurpleFilmApp.swift in Sources */,
+				AE280EAC2ABA8D0000BA2196 /* BackImages.swift in Sources */,
+				AE5EC4272AB7FBF600CF166F /* AdaptsToKeyboard.swift in Sources */,
+				AEDF00B72ABB57D6009C65C3 /* UIScreen.swift in Sources */,
 				AEB333A92AB5E71A0058D334 /* MainView.swift in Sources */,
+				AEDF00B02ABB3E62009C65C3 /* RoundedCorner.swift in Sources */,
 				AE227E662AB0651B00C92D26 /* MovieFilmFeature.swift in Sources */,
+				AEDF00B52ABB4EAD009C65C3 /* ShapedViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,7 +377,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "C-PurpleFilm-Info.plist";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장용,,";
+				INFOPLIST_KEY_NSCameraUsageDescription = "사진 촬영을 위해 카메라에 접근합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "이미지 저장을 위해 갤러리에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -340,7 +389,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yun.seeFilm.C-PurpleFilm";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yun.seeFilm.PurpleFilm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -360,7 +409,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "C-PurpleFilm-Info.plist";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장용,,";
+				INFOPLIST_KEY_NSCameraUsageDescription = "사진 촬영을 위해 카메라에 접근합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "이미지 저장을 위해 갤러리에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -371,7 +421,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yun.seeFilm.C-PurpleFilm";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yun.seeFilm.PurpleFilm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -411,6 +461,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		AEDF00B12ABB44DD009C65C3 /* XCRemoteSwiftPackageReference "CenterOriginSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thompson-dean/CenterOriginSlider.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -418,6 +476,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AEBA39552AAF02D200658F1A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		AEDF00B22ABB44DD009C65C3 /* CenterOriginSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AEDF00B12ABB44DD009C65C3 /* XCRemoteSwiftPackageReference "CenterOriginSlider" */;
+			productName = CenterOriginSlider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

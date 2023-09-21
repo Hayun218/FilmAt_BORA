@@ -9,6 +9,14 @@ import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
 
+
+// filterOptions
+let filters : [CIFilter] = [
+  CIFilter.photoEffectChrome()
+]
+
+
+
 class FilterList{
   
   // Coefficient
@@ -24,9 +32,9 @@ class FilterList{
   @Published var brightness: Double = 0.0
   
   
-  func amplifyPurpleColor(imgData: Data) -> UIImage {
+  func amplifyPurpleColor(imgData: Data) -> Data {
     
-    var uiImage: UIImage? = nil
+    var uiImage = UIImage()
     
     // Convert UIImage to CIImage
     let ciImage = CIImage(data: imgData)
@@ -47,13 +55,86 @@ class FilterList{
     
     // Get the filtered output image
     if let outputImage = crossPolynomialFilter.outputImage {
-
+      
       let context = CIContext()
       if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
         print("stored UIImage")
         uiImage = UIImage(cgImage: cgImage)
       }
     }
-    return uiImage!
+    return uiImage.pngData()!
   }
+  
+  
+  func applyMovieFilter(imgData: Data, styleNum: filterStyle) -> Data{
+    // to avoid lag -> do it in background (Asynchronous)
+    //  DispatchQueue.global(qos: .userInteractive).async {
+    // loaidng Image into filter,,
+    let CiImage = CIImage(data: imgData)
+    
+    let filter = filters[styleNum.rawValue]
+    
+    filter.setValue(CiImage!, forKey: kCIInputImageKey)
+    
+    // retreving Image,,,
+    guard let newImage = filter.outputImage else {return imgData
+    }
+    
+    return (UIImage(ciImage: newImage).pngData())!
+    
+    //   }
+  }
+  
+  func applyEditFilter(imgData:Data, intensity: Float, kinds: editOpt) -> Data{
+    
+    // 1
+    let uiImage = UIImage(data: imgData)
+    
+    let ciImage = CIImage(image: uiImage!)
+    
+    var filter = CIFilter(name: "CIColorControls")!
+    
+//    DispatchQueue.global(qos: .userInteractive).async {
+      filter.setValue(ciImage, forKey: kCIInputImageKey)
+      
+      switch kinds{
+      case .brightness:
+        filter.setValue(intensity, forKey: kCIInputBrightnessKey)
+        
+      case .contrast:
+        filter.setValue(intensity, forKey: kCIInputContrastKey)
+        
+      case .saturation:
+        filter.setValue(intensity, forKey: kCIInputSaturationKey)
+        
+      case .sharpen:
+        if let filterSharp = CIFilter(name: "CIUnsharpMask"){
+          filter = filterSharp
+          filter.setValue(ciImage, forKey: kCIInputImageKey)
+          filter.setValue(7, forKey: kCIInputIntensityKey)
+          filter.setValue(intensity, forKey: kCIInputIntensityKey)
+          
+        }else{
+          print("none")
+        }
+      }
+//    }
+    
+    
+    if let output = filter.outputImage{
+      return UIImage(ciImage: output).pngData()!
+    } else{
+      print("Not adapted")
+      return imgData
+    }
+  }
+  
+  
 }
+
+
+
+
+
+
+
