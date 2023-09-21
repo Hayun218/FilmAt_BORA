@@ -15,84 +15,146 @@ struct MovieFilmFeature: Reducer{
   
   struct State: Equatable {
     
-    var isSize16 = true
-    var fontStyleOpened: Bool = false
     
-    //var editButton: editOpt = .brightness
-//    @BindingState var brightnessV: Float = 0.0
+    var selectedFilterNum = 5
+    var isKeyboardVisible = false
+    var fontStyleIndex: Int = 0
+    var selectedFont: fontStyle = .chosun
     
-    // movie text apply
+    var fontSizeIndex: Int = 0
+    var fontSize: fontSize = .small
+    
+    var fontColorIndex: Int = 0
+    var fontColor: fontColor = .black
+    
+    
     @BindingState var textOnImg: String = ""
-    var isEdited: Bool = false
-    var selectedFont: String = fontStyle.nanum.rawValue
+    var oriTextOnImg: String = ""
     
-    enum fontStyle: String{
+    var isTextOn: Bool = false
+    
+    enum fontColor: Int {
+      case black = 0x000000
+      case gray = 0x808080
+      case white = 0xFFFFFF
+    }
+   
+    enum fontSize: CGFloat{
+      case small = 220
+      case medium = 260
+      case large = 300
+    }
+    
+    enum fontStyle: String, CaseIterable{
       case chosun = "ChosunilboNM"
-      case hakgo = "HakgyoansimWoojuRh"
+      case hakgo = "HakgyoansimWoojuR"
       case nanum = "NanumGothic"
     }
+    
   }
   
   enum Action: BindableAction{
     
+    case isKeyBoardAppeared(Bool)
     
-    case size16ButtonTapped
-    case size21ButtonTapped
-        
-    // movie Text
     case adaptTextButtonTapped
-    case binding(BindingAction<State>)
     
     case fontStyleButtonTapped
+    case fontSizeButtonTapped
+    case fontColorButtonTapped
     
-    case filterApplyButtonTapped
+    case filterApplyButtonTapped(filterStyle)
     
-    //case editOptButtonTapped(editOpt)
-    
-    
+    case binding(BindingAction<State>)
     case delegate(Delegate)
     
     enum Delegate{
       case applyTextOnImg
+      case applyFilterOnImg(filterStyle)
       
     }
-    
-    
-    
   }
   
   
   var body: some ReducerOf<Self>{
-//    let filterList = FilterList()
     BindingReducer()
     
     Reduce { state, action in
       switch action{
         
-      case .filterApplyButtonTapped:
-//        state.editedImage = filterList.amplifyPurpleColor(imgData: state.image)
+      case let .filterApplyButtonTapped(filterNum):
+        state.selectedFilterNum = filterNum.rawValue
+        return .run{ send in
+          await send(.delegate(.applyFilterOnImg(filterNum)))
+        }
         
-        return .none
         
       case .delegate:
         return .none
         
         
-      case .size16ButtonTapped:
-        state.isSize16 = true
-        return .none
+      case .fontColorButtonTapped:
         
-      case .size21ButtonTapped:
-        state.isSize16 = false
-        return .none
+        if state.fontColorIndex+12 > 25{
+          state.fontColorIndex = 0
+        }else{
+          state.fontColorIndex += 12}
         
-//      case let .editOptButtonTapped(editOptValue):
-//        state.editButton = editOptValue
-//        return .none
+        if state.fontColorIndex == 0 {
+          state.fontColor = .black
+        } else if state.fontSizeIndex == 12{
+          state.fontColor = .gray
+        } else {
+          state.fontColor = .white
+        }
+        
+        return .run{send in
+          await send(.delegate(.applyTextOnImg))
+        }
+        
+     
+        
+      
+      case .fontSizeButtonTapped:
+        
+        if state.fontSizeIndex+12 > 25{
+          state.fontSizeIndex = 0
+        }else{
+          state.fontSizeIndex += 12}
+        
+        if state.fontStyleIndex == 0 {
+          state.fontSize = .small
+        } else if state.fontStyleIndex == 12{
+          state.fontSize = .medium
+        } else {
+          state.fontSize = .large
+        }
+        return .run{send in
+          await send(.delegate(.applyTextOnImg))
+        }
+        
+      case let .isKeyBoardAppeared(newKeyValue):
+        state.isKeyboardVisible = newKeyValue
+        return .none
+      
         
       case .fontStyleButtonTapped:
-        state.fontStyleOpened.toggle()
-        return .none
+        if state.fontStyleIndex+12 > 25{
+          state.fontStyleIndex = 0
+        }else{
+          state.fontStyleIndex += 12}
+        
+        if state.fontStyleIndex == 0 {
+          state.selectedFont = .chosun
+        } else if state.fontStyleIndex == 12{
+          state.selectedFont = .hakgo
+        } else {
+          state.selectedFont = .nanum
+        }
+        
+        return .run{send in
+          await send(.delegate(.applyTextOnImg))
+        }
         
         
       case .binding:
@@ -102,7 +164,7 @@ struct MovieFilmFeature: Reducer{
         return .run{ send in
           await send(.delegate(.applyTextOnImg))
         }
-
+        
         
       }
     }

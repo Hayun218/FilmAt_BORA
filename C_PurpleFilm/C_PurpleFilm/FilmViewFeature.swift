@@ -15,19 +15,33 @@ import ComposableArchitecture
 struct FilmViewFeature: Reducer{
   
   struct State: Equatable{
+    @BindingState var showCamSheet: Bool = false
+    @BindingState var uiImg = UIImage()
     var image: Data?
     var path = StackState<MainViewFeature.State>()
   }
   
-  enum Action{
+  enum Action: BindableAction{
+    case camButtonTapped
+    case binding(BindingAction<State>)
     case photoStored(image: Data)
     case bgmImgIsTapped
     case path(StackAction<MainViewFeature.State, MainViewFeature.Action>)
   }
   
   var body: some ReducerOf<Self>{
+    BindingReducer()
+    
     Reduce{ state, action in
       switch action{
+        
+      case .camButtonTapped:
+        state.showCamSheet = true
+        return .none
+
+        
+      case .binding:
+        return .none
         
       case let .photoStored(data):
         state.image = nil
@@ -43,7 +57,7 @@ struct FilmViewFeature: Reducer{
       }
     }
     .forEach(\.path, action: /Action.path) {
-      MainViewFeature()
+      MainViewFeature()._printChanges()
     }
   }
 }

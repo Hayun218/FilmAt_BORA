@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "centeroriginslider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/thompson-dean/CenterOriginSlider.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "72c3eb66a38624aafb6cbc18ab2131f23eb616f9"
+      }
+    },
+    {
       "identity" : "combine-schedulers",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/combine-schedulers",

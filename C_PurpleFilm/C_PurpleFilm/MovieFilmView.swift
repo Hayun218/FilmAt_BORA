@@ -3,25 +3,32 @@
 //  C_PurpleFilm
 //
 //  Created by yun on 2023/09/17.
-//
+//d
 
 import SwiftUI
-import CoreImage
-import CoreImage.CIFilterBuiltins
 
 import ComposableArchitecture
 
 
 enum movieOpt: String, CaseIterable{
+  case fontStyle = "fontStyle"
   case textSize = "textSize"
   case textColor = "textColor"
-  case fontStyle = "fontStyle"
   case grain = "grain"
 }
 
+enum filterStyle: Int{
+  case filterOne = 0
+  case filterTwo = 1
+  case filterThree = 2
+  case filterFour = 3
+  case filterFive = 4
+}
 
-struct MovieFilmView: View{
+struct MovieFilmView: View, KeyboardReadable{
   let store: StoreOf<MovieFilmFeature>
+  
+  let buttonSize: CGFloat = 60
   
   let screenW = UIScreen.main.bounds.width
   let screenH = UIScreen.main.bounds.height
@@ -31,64 +38,95 @@ struct MovieFilmView: View{
   public init(store: StoreOf<MovieFilmFeature>) {
     self.store = store
     viewStore = ViewStore(store, observe: {$0})
+    
+  
+    
+    for family in UIFont.familyNames.sorted() {
+        let names = UIFont.fontNames(forFamilyName: family)
+        print("Family: \(family) Font names: \(names)")
+    }
   }
   
   
-  @Namespace var animation
-  
   var body: some View{
-    
-    
     
     VStack{
       
       
-      // MARK: -SizeRatio Buttons
-      HStack{
-        Button {
-          viewStore.send(.size16ButtonTapped)
-        } label: {
-          Text("16/9")
-            .frame(width: 26*4, height: 9*4)
-            .background(Color("AccentColor").opacity(0.3))
-            .foregroundColor(.white)
-            .cornerRadius(6)
-        }
-      
+      if !viewStore.isKeyboardVisible {
         
         
-        Button {
-          viewStore.send(.size21ButtonTapped)
-        } label: {
-          Text("21/9")
-            .frame(width: 21*4, height: 9*4)
-            .background(Color("AccentColor").opacity(0.3))
-            .foregroundColor(.white)
-            .cornerRadius(6)
+        
+        // MARK: - Filter Options
+        HStack(spacing: 15){
+          Button {
+//            DispatchQueue.global(qos: .userInteractive).async{
+              viewStore.send(.filterApplyButtonTapped(.filterOne))
+//            }
+          } label: {
+            
+            Text("LAVENDAR")
+              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 0 ? .bold : .regular))
+              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 0 ? 0xB367FF : 0x747474))
+              .padding(.all, 5)
+              .background(viewStore.selectedFilterNum == 0 ? Color(hex: 0xD9C2F0): .clear)
+              .cornerRadius(5)
+          }
+          Button {
+            viewStore.send(.filterApplyButtonTapped(.filterTwo))
+            
+          } label: {
+            Text("LILAC")
+              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 1 ? .bold : .regular))
+              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 1 ? 0xB367FF : 0x747474))
+              .padding(.all, 5)
+              .background(viewStore.selectedFilterNum == 1 ? Color(hex: 0xD9C2F0): .clear)
+              .cornerRadius(5)
+          }
+          Button {
+            viewStore.send(.filterApplyButtonTapped(.filterThree))
+            
+          } label: {
+            Text("PLUM")
+              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 2 ? .bold : .regular))
+              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 2 ? 0xB367FF : 0x747474))
+              .padding(.all, 5)
+              .background(viewStore.selectedFilterNum == 2 ? Color(hex: 0xD9C2F0): .clear)
+              .cornerRadius(5)
+          }
+          Button {
+            viewStore.send(.filterApplyButtonTapped(.filterFour))
+            
+          } label: {
+            Text("VIOLET")
+              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 3 ? .bold : .regular))
+              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 3 ? 0xB367FF : 0x747474))
+              .padding(.all, 5)
+              .background(viewStore.selectedFilterNum == 3 ? Color(hex: 0xD9C2F0): .clear)
+              .cornerRadius(5)
+          }
+          Button {
+            viewStore.send(.filterApplyButtonTapped(.filterFive))
+            
+          } label: {
+            Text("MOUVE")
+              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 4 ? .bold : .regular))
+              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 4 ? 0xB367FF : 0x747474))
+              .padding(.all, 5)
+              .background(viewStore.selectedFilterNum == 4 ? Color(hex: 0xD9C2F0): .clear)
+              .cornerRadius(5)
+          }
           
         }
+        .padding([.leading, .trailing], 20)
+        .offset(x: 0, y: -UIScreen.screenHeight/3)
       }
-      .frame(width: screenW, height:screenH/10)
-      .padding()
-      .offset(x: 0, y: -screenH/2.3)
-      
-      
-      // MARK: - Film
-      Button {
-        viewStore.send(.filterApplyButtonTapped)
-        
-      } label: {
-        Text("Filter")
-      } .offset(x: 0, y: -screenH/2.2)
       
       
       // MARK: -TextField
       
-      
       HStack{
         TextField("영화 문구를 작성하세요.", text: viewStore.$textOnImg)
-          .padding()
-        
         Button {
           viewStore.send(.adaptTextButtonTapped)
         } label: {
@@ -96,66 +134,129 @@ struct MovieFilmView: View{
         }
       }
       .padding()
-      .offset(x: 0, y: -screenH/8)
+      .offset(x: 0, y:  viewStore.isKeyboardVisible ? 100:0)
+      
       
       
       // MARK: -MovieOpt
       
       Spacer()
       
-      HStack(){
-        ForEach(movieOpt.allCases, id: \.self) { item in
-          
-          switch item{
+      if !viewStore.isKeyboardVisible {
+        
+        HStack(spacing: 29){
+          ForEach(movieOpt.allCases, id: \.self) { item in
             
-          case .fontStyle:
-            Button {
+            switch item{
               
-              viewStore.send(.fontStyleButtonTapped)
-            } label: {
-              VStack{
-                Image(systemName: "camera")
-                Text("Style")
+            case .fontStyle:
+              Button {
+                viewStore.send(.fontStyleButtonTapped)
+              } label: {
+                  VStack{
+                    Image(systemName: "textformat")
+                      .frame(width: buttonSize, height: buttonSize)
+                      .background(Color(hex: 0xD9D9D9))
+                      .clipShape(
+                        Circle())
+                      .overlay(
+                        RoundedRectangle(cornerRadius: 100)
+                        .inset(by: 4)
+                        .trim(from: 0, to: CGFloat(0.35))
+                        .stroke(Color(hex: 0xDEC1FB), lineWidth: 5)
+                        .rotationEffect(.degrees(Double(viewStore.fontStyleIndex)*10))
+                      )
+                    Text("FONT")
+                      .font(.system(size: 10))
+                      .foregroundColor(Color(hex: 0x747474))
+                  }
+                  .foregroundColor(.black)
               }
-            }
-            
-            
-          case .textSize:
-            Button {
-              viewStore.send(.fontStyleButtonTapped)
-            } label: {
-              VStack{
-                Image(systemName: "camera")
-                Text("Size")
+              
+              
+            case .textSize:
+              Button {
+                viewStore.send(.fontSizeButtonTapped)
+                
+                
+              } label: {
+                VStack{
+                  Image(systemName: "textformat.size")
+                    .frame(width: buttonSize, height: buttonSize)
+                    .background(Color(hex: 0xD9D9D9))
+                    .clipShape(Circle())
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 100)
+                    .inset(by: 4)
+                    .trim(from: 0, to: CGFloat(0.35))
+                    .stroke(Color(hex: 0xDEC1FB), lineWidth: 5)
+                    .rotationEffect(.degrees(Double(viewStore.fontSizeIndex)*10))
+                  )
+                   
+                  Text("SIZE")
+                    .font(.system(size: 10))
+                    .foregroundColor(Color(hex: 0x747474))
+                }
+                .foregroundColor(.black)
+                }
+              
+              
+            case .textColor:
+              Button {
+                viewStore.send(.fontColorButtonTapped)
+              } label: {
+                VStack{
+                  Image(systemName: "circle.fill")
+                    .frame(width: buttonSize, height: buttonSize)
+                    .background(Color(hex: 0xD9D9D9))
+                    .clipShape(Circle())
+                    .overlay(
+                      RoundedRectangle(cornerRadius: 100)
+                      .inset(by: 4)
+                      .trim(from: 0, to: CGFloat(0.35))
+                      .stroke(Color(hex: 0xDEC1FB), lineWidth: 5)
+                      .rotationEffect(.degrees(Double(viewStore.fontColorIndex)*10))
+                    )
+                   
+                  Text("COLOR")
+                    .font(.system(size: 10))
+                    .foregroundColor(Color(hex: 0x747474))
+                }
+                .foregroundColor(.black)
               }
-            }
-            
-          case .textColor:
-            Button {
-              viewStore.send(.fontStyleButtonTapped)
-            } label: {
-              VStack{
-                Image(systemName: "camera")
-                Text("Color")
+              
+              
+            case .grain:
+              Button {
+                viewStore.send(.fontStyleButtonTapped)
+              } label: {
+                VStack{
+                  Image("grainIcon")
+                    .frame(width: buttonSize, height: buttonSize)
+                    .background(Color(hex: 0xD9D9D9))
+                    .clipShape(Circle())
+                   
+                  Text("GRAIN")
+                    .font(.system(size: 10))
+                    .foregroundColor(Color(hex: 0x747474))
+                }
+                .foregroundColor(.black)
               }
-            }
-            
-            
-          case .grain:
-            Button {
-              viewStore.send(.fontStyleButtonTapped)
-            } label: {
-              VStack{
-                Image(systemName: "camera")
-                Text("Grain")
-              }
+              
             }
             
           }
-          
-        }.padding()
+        }
+        .padding([.leading, .trailing], 24)
+        .padding(.bottom, 37)
+        
+        
         
       }
+    }
+    .onReceive(keyboardPublisher) { newIsKeyboardVisible in
+      print("Is keyboard visible? ", newIsKeyboardVisible)
+      viewStore.send(.isKeyBoardAppeared(newIsKeyboardVisible))
     }
   }
 }
