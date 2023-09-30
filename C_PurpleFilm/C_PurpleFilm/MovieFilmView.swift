@@ -38,13 +38,11 @@ struct MovieFilmView: View, KeyboardReadable{
   public init(store: StoreOf<MovieFilmFeature>) {
     self.store = store
     viewStore = ViewStore(store, observe: {$0})
-    
-  
-    
-    for family in UIFont.familyNames.sorted() {
-        let names = UIFont.fontNames(forFamilyName: family)
-        print("Family: \(family) Font names: \(names)")
-    }
+
+//    for family in UIFont.familyNames.sorted() {
+//        let names = UIFont.fontNames(forFamilyName: family)
+//        print("Family: \(family) Font names: \(names)")
+//    }
   }
   
   
@@ -55,8 +53,6 @@ struct MovieFilmView: View, KeyboardReadable{
       
       if !viewStore.isKeyboardVisible {
         
-        
-        
         // MARK: - Filter Options
         HStack(spacing: 15){
           Button {
@@ -64,62 +60,36 @@ struct MovieFilmView: View, KeyboardReadable{
               viewStore.send(.filterApplyButtonTapped(.filterOne))
 //            }
           } label: {
-            
-            Text("LAVENDAR")
-              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 0 ? .bold : .regular))
-              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 0 ? 0xB367FF : 0x747474))
-              .padding(.all, 5)
-              .background(viewStore.selectedFilterNum == 0 ? Color(hex: 0xD9C2F0): .clear)
-              .cornerRadius(5)
+            FilterTextView(title: "LAVENDAR", filterNum: viewStore.selectedFilterNum, currentNum: 0)
           }
           Button {
             viewStore.send(.filterApplyButtonTapped(.filterTwo))
             
           } label: {
-            Text("LILAC")
-              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 1 ? .bold : .regular))
-              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 1 ? 0xB367FF : 0x747474))
-              .padding(.all, 5)
-              .background(viewStore.selectedFilterNum == 1 ? Color(hex: 0xD9C2F0): .clear)
-              .cornerRadius(5)
+            FilterTextView(title: "LILAC", filterNum: viewStore.selectedFilterNum, currentNum: 1)
           }
           Button {
             viewStore.send(.filterApplyButtonTapped(.filterThree))
             
           } label: {
-            Text("PLUM")
-              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 2 ? .bold : .regular))
-              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 2 ? 0xB367FF : 0x747474))
-              .padding(.all, 5)
-              .background(viewStore.selectedFilterNum == 2 ? Color(hex: 0xD9C2F0): .clear)
-              .cornerRadius(5)
+            FilterTextView(title: "PLUM", filterNum: viewStore.selectedFilterNum, currentNum: 2)
           }
           Button {
             viewStore.send(.filterApplyButtonTapped(.filterFour))
             
           } label: {
-            Text("VIOLET")
-              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 3 ? .bold : .regular))
-              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 3 ? 0xB367FF : 0x747474))
-              .padding(.all, 5)
-              .background(viewStore.selectedFilterNum == 3 ? Color(hex: 0xD9C2F0): .clear)
-              .cornerRadius(5)
+            FilterTextView(title: "VIOLET", filterNum: viewStore.selectedFilterNum, currentNum: 3)
           }
           Button {
             viewStore.send(.filterApplyButtonTapped(.filterFive))
             
           } label: {
-            Text("MOUVE")
-              .font(.system(size: 12, weight: viewStore.selectedFilterNum == 4 ? .bold : .regular))
-              .foregroundColor(Color(hex: viewStore.selectedFilterNum == 4 ? 0xB367FF : 0x747474))
-              .padding(.all, 5)
-              .background(viewStore.selectedFilterNum == 4 ? Color(hex: 0xD9C2F0): .clear)
-              .cornerRadius(5)
+            FilterTextView(title: "MOUVE", filterNum: viewStore.selectedFilterNum, currentNum: 4)
           }
           
         }
         .padding([.leading, .trailing], 20)
-        .offset(x: 0, y: -UIScreen.screenHeight/3)
+        .offset(x: 0, y: -UIScreen.screenHeight/2.6)
       }
       
       
@@ -133,8 +103,9 @@ struct MovieFilmView: View, KeyboardReadable{
           Text("적용하기")
         }
       }
+      .foregroundColor(Color.accent100)
       .padding()
-      .offset(x: 0, y:  viewStore.isKeyboardVisible ? 100:0)
+      .offset(x: 0, y:  viewStore.isKeyboardVisible ? 120:0)
       
       
       
@@ -249,9 +220,6 @@ struct MovieFilmView: View, KeyboardReadable{
         }
         .padding([.leading, .trailing], 24)
         .padding(.bottom, 37)
-        
-        
-        
       }
     }
     .onReceive(keyboardPublisher) { newIsKeyboardVisible in

@@ -10,157 +10,136 @@ import PhotosUI
 
 import ComposableArchitecture
 
+// 스크롤뷰를 위함 => 17이전 버전도 허용할려면 UIKit 활용
+@available(iOS 17.0, *)
 
 struct FilmView: View{
   
   let store: StoreOf<FilmViewFeature>
   
   @ObservedObject private var viewStore: ViewStoreOf<FilmViewFeature>
-  @State private var isSelected: Bool = false
   
-  let opaV = 0.2
-  let cornerV: CGFloat = 20
+  @State var isGalleryOpened:Bool = false
   
   public init(store: StoreOf<FilmViewFeature>) {
     self.store = store
     viewStore = ViewStore(store, observe: {$0})
   }
   
-  @State private var selectedPhoto: [PhotosPickerItem] = []
+  let bgI = BackImages()
   
   var body: some View{
-    NavigationStackStore(
-      self.store.scope(state: \.path, action: {.path($0)})){
-        
-        ZStack{
-          
-          ScrollView(.vertical){
-            LazyHStack(spacing: 0){
-            //  ForEach(bgImages)
-            }
+    NavigationStack{
+      VStack{
+        // MARK: - Tab Menu Bar
+        HStack (spacing: 20){
+          Button {
+            viewStore.send(.camButtonTapped)
+          } label: {
+            Image(systemName: "camera.fill")
+              .font(.system(size: 22))
           }
+          Spacer()
           
-          Image("BosQue")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .edgesIgnoringSafeArea(.all)
-           
-          
-          VStack{
-           
-            
-            
-              
-              
-              HStack (spacing: 20){
+          Button {
+            viewStore.send(.galleryButtonTapped)
+          } label: {
+            Image(systemName: "photo.fill")
+.font(.system(size: 22))
+          }
+        }
+        .padding([.leading, .trailing, .bottom], 16)
+        .foregroundColor(.black)
+        
+        // MARK: - ScrollView BGI
+        GeometryReader { gr in
+          ScrollViewReader{ value in
+            ScrollView(.vertical){
+              ForEach(bgI.bgImages.indices, id: \.self){ index in
                 
-                
-                Button {
-                  viewStore.send(.camButtonTapped)
-                } label: {
-                  Image(systemName: "camera.fill")
-                    .font(.system(size: 22))
-                    
-                }
-                Spacer()
-                
-                
-                if let data = viewStore.image {
-                  NavigationLink(state: MainViewFeature.State(imageWithFilter: data, oriImage: data, editedImage: UIImage(data: data)!)){
-                    Text("MOVIE ON THE IMAGE")
-                      .foregroundColor(.white)
-                  }
-                  Spacer()
-                }
-
-                PhotosPicker(
-                  selection: $selectedPhoto,
-                  maxSelectionCount: 1,
-                  matching: .any(of: [.images, .screenshots, .livePhotos])
-                ) {
+                VStack{
+                  ZStack{
+                    Image(bgI.bgImages[index].name)
+                      .resizable()
+                      .aspectRatio(contentMode: .fill)
+                      .frame(width: gr.size.width)
+                      .id(bgI.bgImages[index].id)
                   
-                  Image(systemName: "photo.fill")
-                    .font(.system(size: 22))
-       
-                }
-                .onChange(of: selectedPhoto) { newValue in
-                  guard let image = selectedPhoto.first else{
-                    return
-                  }
-                  image.loadTransferable(type: Data.self) { result in
-                    switch result{
-                    case .success(let data):
-                      if let data = data{
-                        DispatchQueue.main.async{
-                          viewStore.send(.photoStored(image: data))
-                        }
-                      } else{
-                        print("Data is nil")
-                      }
-                    case .failure(let failure):
-                      fatalError("\(failure)")
-                      
+                    HStack{
+                      Image(systemName: "at")
+                      Text(bgI.bgLocation[index])
+                        .id(bgI.bgImages[index].id)
+                      Spacer()
                     }
+                    .padding()
                   }
-                }
-                
-                
-              }
-              .padding([.leading, .trailing, .bottom], 20)
-              .background(.black.opacity(opaV))
-              //.roundedCorner(20, corners: [.bottomLeft, .bottomRight])
-              .foregroundColor(.white)
-            
-        
-             
-            Spacer()
-            
-            HStack{
-              Spacer()
-              VStack{
-                Button {
                   
-                } label: {
-                  Image(systemName: "chevron.up")
-                    .foregroundColor(.white)
-                }
-                .padding()
-                
-                Text("1/20")
-                  .foregroundColor(.white)
-                
-                
-                Button {
+                  // Button Gesture in Images
+                  HStack{
+                    Spacer()
+                    VStack{
+                      Button {
+                        if index-1 >= 0{
+                          withAnimation{
+                            value.scrollTo(index-1)
+                          }
+                        }
+                      } label: {
+                        Image(systemName: "chevron.up")
+                          .padding()
+                      }
+                      Text("\(index+1) / 20")
+                        .padding()
+                      Button {
+                        if index+1 < 20{
+                          withAnimation{
+                            value.scrollTo(index+1)
+                          }
+                        }
+                      } label: {
+                        Image(systemName: "chevron.down")
+                          .padding()
+                      }
+                    }
+                    .foregroundColor(.black)
+                  }
+                  .padding([.bottom], gr.size.height/10)
                   
-                } label: {
-                  Image(systemName: "chevron.down")
-                    .foregroundColor(.white)
                 }
-                .padding()
-                
+                .frame(width: gr.size.width, height: gr.size.height)
               }
-//              .background(.white.opacity(opaV))
-//              .cornerRadius(cornerV)
-              
-              
             }
-            .padding()
+            .scrollTargetBehavior(.paging)
           }
-          
         }
-        .fullScreenCover(isPresented: viewStore.$showCamSheet, content: {
-          ImagePicker(sourceType: .camera, selectedImage: viewStore.$uiImg, isSelected: $isSelected)
-        })
-        .onChange(of: isSelected) { newValue in
-          DispatchQueue.main.async{
-            viewStore.send(.photoStored(image: viewStore.uiImg.pngData()!))
-          }
-          isSelected = false
-        }
+        .ignoresSafeArea(.all)
       }
-  destination: {store  in
-    MainView(store: store)
-  }
+      
+      // MARK: - Camera Opened
+      .fullScreenCover(isPresented: viewStore.$showCamSheet, content: {
+        ImagePicker(sourceType: .camera, selectedImage: viewStore.$uiImg, isSelected: viewStore.$isCamPhotoOpened)
+          .ignoresSafeArea()
+      })
+      
+      // MARK: - Gallery Opened
+      
+      .sheet(isPresented: viewStore.$isGalleryOpened, content: {
+        ImagePicker(sourceType: .photoLibrary, selectedImage: viewStore.$uiImg, isSelected: viewStore.$isGalleryOpened)
+          .ignoresSafeArea()
+      })
+      
+      // MARK: - Image Stored
+      .onChange(of: viewStore.$uiImg) { _ in
+        viewStore.send(.loadData(viewStore.uiImg.pngData()!))
+        viewStore.send(.photoSelectionCompleted)
+      }
+      
+      // MARK: - Navigation to MainView (Tree-Based)
+      .navigationDestination(
+        store: self.store.scope(state: \.$mainView, action: { .mainView($0) })
+      ){ store in
+        MainView(store: store)
+      }
+    }
   }
 }
