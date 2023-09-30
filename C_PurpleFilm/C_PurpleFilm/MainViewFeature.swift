@@ -71,6 +71,8 @@ struct MainViewFeature: Reducer{
         // MARK: - EditFilm Action
       case let .editFilm(.delegate(action)):
         switch action{
+          
+          // EditOptionsApply
         case let .applyFilteredImg(kind):
           let filterList = FilterList()
           var applyValue: Float = 0.0
@@ -91,26 +93,24 @@ struct MainViewFeature: Reducer{
           state.editFilm.isFiltering = true
           
           return .none
-//          return .run{send in
-//            async send(.editFilm(.delegate(.adaptFilteredImg(kind))))}
           
           
+          // when button tapped
         case let .adaptFilteredImg(kind):
-          
           
           // back to default
           switch kind{
           case .brightness:
             state.editFilm.contrastV = 0.0
-            state.editFilm.sharpenV = 0.5
+            state.editFilm.sharpenV = 0.0
             state.editFilm.saturationV = 0.0
           case .contrast:
             state.editFilm.brightnessV = 0.0
-            state.editFilm.sharpenV = 0.5
+            state.editFilm.sharpenV = 0.0
             state.editFilm.saturationV = 0.0
           case .saturation:
             state.editFilm.contrastV = 0.0
-            state.editFilm.sharpenV = 0.5
+            state.editFilm.sharpenV = 0.0
             state.editFilm.brightnessV = 0.0
           case .sharpen:
             state.editFilm.contrastV = 0.0
@@ -140,19 +140,20 @@ struct MainViewFeature: Reducer{
           }
           return .none
         }
+        
       case .bringTextBackOnImg:
         if state.movieFilm.isTextOn{
           state.editedImage = UIImage(data: state.imageWithFilter)!
         }
-        let uiImg = state.editedImage
         
+        let uiImg = state.editedImage
         let composition = UIGraphicsImageRenderer(size: uiImg.size)
         
         state.editedImage = composition.image { _ in
           uiImg.draw(in: CGRect(origin: .zero, size: uiImg.size))
           
           let textAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: state.movieFilm.selectedFont.rawValue, size: state.movieFilm.fontSize.rawValue) ?? UIFont.systemFont(ofSize: 200),
+            .font: UIFont(name: state.movieFilm.selectedFont.rawValue, size: state.movieFilm.fontSize.rawValue)!,
             .foregroundColor: UIColor(rgb: state.movieFilm.fontColor.rawValue)
           ]
           
@@ -173,13 +174,13 @@ struct MainViewFeature: Reducer{
         return .none
         
         
-      // MARK: - Movie Film
+        // MARK: - Movie Film
       case let .movieFilm(.delegate(action)):
         switch action{
         case let .applyFilterOnImg(filterNum):
           
-            state.imageWithFilter = filterList.applyMovieFilter(imgData: state.oriImage, styleNum: filterNum)
-            state.editedImage = UIImage(data: state.imageWithFilter)!
+          state.imageWithFilter = filterList.applyMovieFilter(imgData: state.oriImage, styleNum: filterNum)
+          state.editedImage = UIImage(data: state.imageWithFilter)!
           
           if state.movieFilm.isTextOn {
             return .run{send in
@@ -201,16 +202,15 @@ struct MainViewFeature: Reducer{
             uiImg.draw(in: CGRect(origin: .zero, size: uiImg.size))
             
             let textAttributes: [NSAttributedString.Key: Any] = [
-              .font: UIFont(name: state.movieFilm.selectedFont.rawValue, size: state.movieFilm.fontSize.rawValue) ?? UIFont.systemFont(ofSize: 200),
+              .font: UIFont(name: state.movieFilm.selectedFont.rawValue, size: state.movieFilm.fontSize.rawValue)!,
               .foregroundColor: UIColor(rgb: state.movieFilm.fontColor.rawValue)
             ]
             let textOnImg: String = state.movieFilm.textOnImg
             
-           
+            
             if textOnImg != ""{
               let textSize = textOnImg.size(withAttributes: textAttributes)
-              let textOrigin = CGPoint(x: (uiImg.size.width - textSize.width) / 2, y: uiImg.size.height - textSize.height - 40)
-              
+              let textOrigin = CGPoint(x: (uiImg.size.width - textSize.width) / 2, y: uiImg.size.height - textSize.height - 140)
               
               textOnImg.draw(at: textOrigin, withAttributes: textAttributes)
               state.movieFilm.oriTextOnImg = textOnImg
@@ -221,6 +221,11 @@ struct MainViewFeature: Reducer{
           }
           return .none
         }
+        
+      case .saveImgButtonTapped:
+        UIImageWriteToSavedPhotosAlbum(state.editedImage, nil, nil, nil)
+        state.showStoreAlert = true
+        return .none
         
         
       case .movieFilm:
@@ -237,10 +242,7 @@ struct MainViewFeature: Reducer{
         state.seletedPicker = .movie
         return .none
         
-      case .saveImgButtonTapped:
-        UIImageWriteToSavedPhotosAlbum(state.editedImage, nil, nil, nil)
-        state.showStoreAlert = true
-        return .none
+
       }
       
     }

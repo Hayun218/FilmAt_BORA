@@ -5,7 +5,6 @@
 //  Created by yun on 2023/09/16.
 //
 
-
 import SwiftUI
 import PhotosUI
 
@@ -15,18 +14,22 @@ import ComposableArchitecture
 struct FilmViewFeature: Reducer{
   
   struct State: Equatable{
+    @PresentationState var mainView: MainViewFeature.State?
+    
     @BindingState var showCamSheet: Bool = false
+    @BindingState var isCamPhotoOpened: Bool = false
+    @BindingState var isGalleryOpened: Bool = false
+    
     @BindingState var uiImg = UIImage()
-    var image: Data?
-    var path = StackState<MainViewFeature.State>()
   }
   
   enum Action: BindableAction{
+    case mainView(PresentationAction<MainViewFeature.Action>)
+    case galleryButtonTapped
     case camButtonTapped
+    case photoSelectionCompleted
+    case loadData(Data)
     case binding(BindingAction<State>)
-    case photoStored(image: Data)
-    case bgmImgIsTapped
-    case path(StackAction<MainViewFeature.State, MainViewFeature.Action>)
   }
   
   var body: some ReducerOf<Self>{
@@ -35,29 +38,33 @@ struct FilmViewFeature: Reducer{
     Reduce{ state, action in
       switch action{
         
+      case .mainView(_):
+        return .none
+        
+      case .galleryButtonTapped:
+        state.isGalleryOpened = true
+        return .none
+        
       case .camButtonTapped:
         state.showCamSheet = true
         return .none
-
+        
+      case .photoSelectionCompleted:
+        state.isGalleryOpened = false
+        state.isCamPhotoOpened = false
+        return .none
+        
+      case let .loadData(data):
+        state.mainView = MainViewFeature.State(imageWithFilter: data, oriImage: data, editedImage: state.uiImg)
+        return .none
         
       case .binding:
         return .none
-        
-      case let .photoStored(data):
-        state.image = nil
-        state.image = data
-        return .none
-        
-      case .bgmImgIsTapped:
-        return .none
-        
-      case .path:
-        return .none
-        
       }
     }
-    .forEach(\.path, action: /Action.path) {
-      MainViewFeature()._printChanges()
+    .ifLet(\.$mainView, action: /Action.mainView){
+      MainViewFeature()
+        ._printChanges()
     }
   }
 }
