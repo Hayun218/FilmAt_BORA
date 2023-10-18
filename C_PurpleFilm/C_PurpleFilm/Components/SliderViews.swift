@@ -71,7 +71,7 @@ struct CenterOriginSliderSpecific: View{
       )
       .frame(width: 250, height: 20)
       Text("\(Int(sliderValue*100))")
-        .frame(width: 30)
+        .frame(width: 40)
     }
     .padding([.trailing, .leading], 10)
   }

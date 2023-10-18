@@ -4,9 +4,10 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Hakgo.ttf</string>
-		<string>NanumGothic.ttf</string>
-		<string>Josun.ttf</string>
+		<string>NanumGothic.otf</string>
+		<string>경기천년바탕OTF_Regular.otf</string>
+		<string>Warhaven_OTF_Regular.otf</string>
+		<string>SUITE-Regular.otf</string>
 	</array>
 </dict>
 </plist>

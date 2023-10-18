@@ -12,11 +12,10 @@ import ComposableArchitecture
 
 struct FilmView: View{
   
+  
   let store: StoreOf<FilmViewFeature>
   
   @ObservedObject private var viewStore: ViewStoreOf<FilmViewFeature>
-  
-  @State var isGalleryOpened:Bool = false
   
   public init(store: StoreOf<FilmViewFeature>) {
     self.store = store
@@ -28,7 +27,9 @@ struct FilmView: View{
   var body: some View{
     NavigationStack{
       VStack(spacing: 0){
+        
         // MARK: - Tab Menu Bar
+        
         HStack(spacing: 22){
           Image("@BORA_purple")
             .resizable()
@@ -50,12 +51,13 @@ struct FilmView: View{
         .padding(16)
         .background(.white)
         .foregroundColor(.black)
-
+        
         
         // MARK: - ScrollView BGI
+        
         GeometryReader { gr in
           ScrollViewReader{ value in
-            ScrollView(.horizontal){
+            ScrollView(.horizontal, showsIndicators: false){
               LazyHStack(spacing: 0){
                 ForEach(bgI.bgImages.indices, id: \.self){ index in
                   VStack{
@@ -85,29 +87,48 @@ struct FilmView: View{
                         Spacer()
                       }
                       Spacer()
-                      Button {
+                      if index+1 < bgI.bgImages.count{
+                        Button {
+                          
+                          withAnimation{
+                            value.scrollTo(index+1)
+                          }
+                          
+                        } label: {
+                          Image(systemName: "chevron.right")
+                        }
+                        .font(.system(size: 16))
+                        .foregroundStyle(.black)
+                      }
+                    }
+                    .padding(24)
+                  }
+                  .frame(width: gr.size.width,
+                         height: gr.size.height)
+                  .gesture(DragGesture()
+                    .onEnded({ location in
+                  
+                      let direction = self.detectDirection(value: location)
+                      if direction == .left {
+                        if index-1 > -1{
+                          withAnimation{
+                            value.scrollTo(index-1)
+                          }
+                        }
+                      } else if direction == .right{
                         if index+1 < bgI.bgImages.count{
                           withAnimation{
                             value.scrollTo(index+1)
                           }
                         }
-                      } label: {
-                        Image(systemName: "chevron.right")
                       }
-                      .font(.system(size: 16))
-                      .foregroundStyle(.black)
-                    }
-                    .padding(24)
-                  }
-                  
-                  .frame(width: gr.size.width,
-                         height: gr.size.height)
+                    })
+                  )
                 }
               }
+      
             }
-            .onAppear {
-              UIScrollView.appearance().isPagingEnabled = true
-            }
+            .scrollDisabled(true)
           }
         }
         .background(.grayBack)
@@ -115,6 +136,7 @@ struct FilmView: View{
       }
       
       // MARK: - Camera Opened
+      
       .fullScreenCover(isPresented: viewStore.$showCamSheet, content: {
         ImagePicker(sourceType: .camera, selectedImage: viewStore.$uiImg, isSelected: viewStore.$isCamPhotoOpened)
           .ignoresSafeArea()
@@ -128,17 +150,40 @@ struct FilmView: View{
       })
       
       // MARK: - Image Stored
+      
       .onChange(of: viewStore.$uiImg) { _ in
         viewStore.send(.loadData(viewStore.uiImg.pngData()!))
         viewStore.send(.photoSelectionCompleted)
       }
       
       // MARK: - Navigation to MainView (Tree-Based)
+      
       .navigationDestination(
         store: self.store.scope(state: \.$mainView, action: { .mainView($0) })
       ){ store in
         MainView(store: store)
       }
     }
+  }
+  
+  // MARK: - Swipe Helper 
+  enum SwipeHVDirection: String {
+    case left, right, up, down, none
+  }
+  
+  func detectDirection(value: DragGesture.Value) -> SwipeHVDirection {
+    if value.startLocation.x < value.location.x - 24 {
+      return .left
+    }
+    if value.startLocation.x > value.location.x + 24 {
+      return .right
+    }
+    if value.startLocation.y < value.location.y - 24 {
+      return .down
+    }
+    if value.startLocation.y > value.location.y + 24 {
+      return .up
+    }
+    return .none
   }
 }

@@ -13,7 +13,7 @@ struct CropViewFeature: Reducer{
   
   struct State: Equatable{
     
- 
+    
     //MARK: - Crop Properties
     var offset: CGSize = .zero
     var lastStoredOffset: CGSize = .zero
@@ -39,16 +39,14 @@ struct CropViewFeature: Reducer{
     
     Reduce{ state, action in
       switch action{
-   
+        
         
       case let .offsetChanged(translation):
         state.offset = CGSize(width: translation.width + state.lastStoredOffset.width, height: translation.height+state.lastStoredOffset.height)
-        print("lastStored\(state.lastStoredOffset)\n newOffset\(state.offset)\n translationg\(translation)")
         return .none
         
       case .saveOffset:
-        
-         state.lastStoredOffset = state.offset
+        state.lastStoredOffset = state.offset
         return .none
         
       case let .scaleChanged(value):
@@ -66,29 +64,32 @@ struct CropViewFeature: Reducer{
         return .none
         
       case let .keepInBorder(rect):
-        print(rect.height)
-        if rect.minX > 0 {
-          state.offset.width = (state.offset.width - rect.minX)
-          state.haptics(.medium)
+        withAnimation {
+          
+          if rect.minX > 0 {
+            state.offset.width = (state.offset.width - rect.minX)
+            state.haptics(.medium)
+          }
+          // TODO: *9/16 비율에 맞추어 Y 조절하기
+          if rect.minY < 0 {
+            
+            state.offset.height = state.offset.height - rect.minY
+            state.haptics(.medium)
+          }
+          if rect.maxX < rect.width {
+            state.offset.width = (rect.minX - state.offset.width)
+            state.haptics(.medium)
+          }
+          //                  if rect.maxY > rect.height{
+          //
+          //                    state.offset.height = rect.maxY //(rect.maxY - state.offset.height)
+          //                    state.haptics(.medium)
+          //                  }
         }
-        if rect.minY > 0 {
-          state.offset.height = (state.offset.height - rect.minY)
-          state.haptics(.medium)
-        }
-        if rect.maxX < rect.width {
-          state.offset.width = (rect.minX - state.offset.width)
-          state.haptics(.medium)
-        }
-        if rect.maxY < rect.height{
-          state.offset.height = (rect.maxY - state.offset.height)
-          state.haptics(.medium)
-        }
-        return .run{send in
-          await send(.saveOffset)
-        }
+        return .none
         
         
-  
+        
       }
     }
   }

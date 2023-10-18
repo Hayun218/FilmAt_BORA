@@ -4,6 +4,7 @@
 //
 //  Created by yun on 2023/09/20.
 //
+// MARK: FilmView Img & Text Data
 
 import SwiftUI
 
