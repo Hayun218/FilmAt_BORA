@@ -14,22 +14,21 @@ import ComposableArchitecture
 struct MovieFilmFeature: Reducer{
   
   struct State: Equatable {
-    
+    var isFirst: Bool = true
     
     var selectedFilter = "none"
     var currentFilter = "none"
     
     var isKeyboardVisible = false
-    var fontStyleIndex: Int = 0
-    var selectedFont: fontStyle = .chosun
+    var fontTypeIndex: Int = 0
+    var selectedFont: fontStyle = .thousnd
     var fontSizeIndex: Int = 0
     var fontSize: fontSize = .small
-    var fontColorIndex: Int = 0
-    var fontColor: fontColor = .black
+    var fontStyleIndex: Int = 0
+    var fontType: fontType = .plain
     var grainStyleIndex = 0
     var grainStyle: grainStyle = .one
     
-//    var isGrainOn: Bool = false
     
     @BindingState var grainV: Float = 0.0
     
@@ -39,25 +38,35 @@ struct MovieFilmFeature: Reducer{
     
     var isTexting: Bool = false
     
-    enum fontColor: Int {
-      case black = 0x000000
-      case gray = 0x808080
-      case white = 0xFFFFFF
+    enum fontType: Int {
+      case plain = 1
+      case opacity = 2
+      case stroke = 3
     }
-   
-    enum fontSize: CGFloat{
+    
+    enum fontSize: CGFloat {
       case small = 16
-      case medium = 20
-      case large = 24
+      case medium = 19
+      case large = 21
     }
     
-    enum fontStyle: String, CaseIterable{
-      case chosun = "ChosunilboNM"
-      case hakgo = "HakgyoansimWoojuR"
-      case nanum = "NanumGothic"
+    enum fontStyle: String, CaseIterable {
+      //      case chosun = "ChosunilboNM"
+      //      case hakgo = "HakgyoansimWoojuR"
+      //      case nanum = "NanumGothic"
+      //      case nexon_bold = "NanumGothicd"
+      
+      case thousnd = "GyeonggiBatangROTF"
+      case thousnd_bold = "GyeonggiBatangROTB"
+      case nanum = "NanumGothicOTF"
+      case nanum_bold = "NanumGothicOTFBold"
+      case nexon = "WarhavenOTFR"
+      case nexon_bold = "WarhavenOTFB"
+      case suite = "SUITE-Regular"
+      case suite_bold = "SUITE-Bold"
     }
     
-    enum grainStyle: String{
+    enum grainStyle: String {
       case one = "grain0"
       case two = "grain1"
       case three = "grain2"
@@ -69,24 +78,19 @@ struct MovieFilmFeature: Reducer{
   
   enum Action: BindableAction{
     
+    case checkFirst
+    
     case textAddButtonTapped
     case isKeyBoardAppeared(Bool)
-    
     case fontStyleButtonTapped
     case fontSizeButtonTapped
-    case fontColorButtonTapped
+    case styleButtonTapped
     case grainButtonTapped
-//    case grainSliderMoved
+    //    case grainSliderMoved
     
     case filterApplyButtonTapped(filterStyle)
     
     case binding(BindingAction<State>)
-//    case delegate(Delegate)
-    
-//    enum Delegate{
-//      case applyFilterOnImg(filterStyle)
-//      
-//    }
   }
   
   
@@ -95,6 +99,15 @@ struct MovieFilmFeature: Reducer{
     
     Reduce { state, action in
       switch action{
+        
+      case .checkFirst:
+        if UserDefaults.standard.object(forKey: "isFirst") == nil {
+          UserDefaults.standard.set(true, forKey: "isFirst")
+          state.isFirst = true
+        } else {
+          state.isFirst = UserDefaults.standard.bool(forKey: "isFirst")
+        }
+        return .none
         
       case .textAddButtonTapped:
         state.isTexting.toggle()
@@ -105,37 +118,46 @@ struct MovieFilmFeature: Reducer{
         return .none
         
       case .fontStyleButtonTapped:
-        if state.fontStyleIndex+12 > 25{
+        if state.fontTypeIndex+12 > 25 {
+          state.fontTypeIndex = 0
+        } else {
+          state.fontTypeIndex += 12 }
+        
+        if state.fontTypeIndex == 0 {
+          state.selectedFont = .thousnd
+        } else if state.fontTypeIndex == 12 {
+          state.selectedFont = .nanum
+        } else {
+          state.selectedFont = .suite
+        }
+        return .none
+        
+      case .styleButtonTapped:
+        if state.fontStyleIndex+12 > 25 {
           state.fontStyleIndex = 0
-        }else{
-          state.fontStyleIndex += 12}
+        } else {
+          state.fontStyleIndex += 12 }
         
         if state.fontStyleIndex == 0 {
-          state.selectedFont = .chosun
-        } else if state.fontStyleIndex == 12{
-          state.selectedFont = .hakgo
+          state.fontType = .plain
+        } else if state.fontStyleIndex == 12 {
+          state.fontType = .opacity
+          
+//          if state.selectedFont == .suite {
+//            state.selectedFont = .suite_bold
+//          }
+//          if state.selectedFont == .nanum {
+//            state.selectedFont = .nanum_bold
+//          }
+//          if state.selectedFont == .thousnd {
+//            state.selectedFont = .thousnd_bold
+//          }
         } else {
-          state.selectedFont = .nanum
-        }
-        return .none
-        
-      case .fontColorButtonTapped:
-        
-        if state.fontColorIndex+12 > 25{
-          state.fontColorIndex = 0
-        }else{
-          state.fontColorIndex += 12}
-        
-        if state.fontColorIndex == 0 {
-          state.fontColor = .black
-        } else if state.fontColorIndex == 12{
-          state.fontColor = .gray
-        } else {
-          state.fontColor = .white
+          state.fontType = .stroke
         }
         
         return .none
-      
+        
       case .fontSizeButtonTapped:
         
         if state.fontSizeIndex+12 > 25{
@@ -166,15 +188,8 @@ struct MovieFilmFeature: Reducer{
         } else {
           state.grainStyle = .three
         }
-//        state.isGrainOn.toggle()
+        //        state.isGrainOn.toggle()
         return .none
-        
-//      case .grainSliderMoved:
-//        return .run {send in
-//          await send(.delegate(.applyGrainOnImg))
-//        }
-        
-        
         
         
       case let .filterApplyButtonTapped(filterType):
@@ -187,9 +202,9 @@ struct MovieFilmFeature: Reducer{
         }
         return .none
         
-//      case .delegate:
-//        return .none
-//        
+        //      case .delegate:
+        //        return .none
+        //
       case .binding:
         return .none
         

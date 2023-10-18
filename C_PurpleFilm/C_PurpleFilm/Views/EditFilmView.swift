@@ -7,18 +7,8 @@
 //
 import SwiftUI
 
-import CenterOriginSlider
 import ComposableArchitecture
 
-
-
-
-enum editOpt: String, CaseIterable{
-  case brightness = "brightness"
-  case contrast = "contrast"
-  case saturation = "saturation"
-  case sharpen = "sharpen"
-}
 
 struct EditFilmView: View{
   
@@ -31,18 +21,14 @@ struct EditFilmView: View{
     viewStore = ViewStore(store, observe: {$0})
   }
   
-  let buttonSize: CGFloat = 60
-  
   var body: some View{
     VStack{
-      // Spacer()
-      
       // Stack View location stable,,
       HStack{
         Text("Hello")
           .foregroundStyle(.clear)
-        
       }
+      
       HStack{
         Spacer()
         Button {
@@ -50,9 +36,13 @@ struct EditFilmView: View{
         } label: {
           Image(systemName: "arrow.uturn.backward")
             .font(.system(size: 18))
+            .background(
+              Circle()
+                .fill(.white.opacity(0.6))
+                .frame(width: 30, height: 30)
+              
+            )
         }
-        
-        
       }
       .foregroundColor(.black)
       .padding()
@@ -66,16 +56,12 @@ struct EditFilmView: View{
         VStack{
           ZStack{
             RoundedRectangle(cornerRadius: 6)
-              .fill(Color(hex: 0xD9D9D9))
+              .fill(.grayButton)
               .frame(width: 327, height: 44)
             
             CenterOriginSliderSpecific(minValue: -0.5, maxValue: 0.5, increment: 0.1, sliderValue: viewStore.$brightnessV)
-            
           }
-          
-          TriangleViewSpecific(width: (UIScreen.main.bounds.width/10) * 7, isUp: false)
-            
-          
+          TriangleViewSpecific(width: (UIScreen.main.bounds.width/10) * 7, isUp: false) 
         }
         
       case .contrast:
@@ -90,8 +76,8 @@ struct EditFilmView: View{
             
           }
           
-            TriangleViewSpecific(width:  UIScreen.screenWidth/5, isUp: false)
-           
+          TriangleViewSpecific(width:  UIScreen.screenWidth/5, isUp: false)
+          
           
         }
         
@@ -109,7 +95,7 @@ struct EditFilmView: View{
             
               .padding([.trailing, .leading], 10)
           }
-         
+          
           TriangleViewSpecific(width: UIScreen.screenWidth/5, isUp: true)
         }
         
@@ -120,8 +106,8 @@ struct EditFilmView: View{
               .fill(.grayButton)
               .frame(width: 327, height: 44)
             
-            
-            CenterOriginSliderSpecific(minValue: -5, maxValue: 5, increment: 0.2, sliderValue: viewStore.$sharpenV)
+            // TODO: - Center Origin -> Original Slider starts from 0!
+            CenterOriginSliderSpecific(minValue: -2, maxValue: 2, increment: 0.2, sliderValue: viewStore.$sharpenV)
               .onChange(of: viewStore.$sharpenV) { _ in
                 DispatchQueue.main.async {
                   viewStore.send(.applySharpend)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+// MARK: - MovieView Filter Text
 struct FilterTextView: View{
   let title: String
   let filterType: String
@@ -25,6 +25,7 @@ struct FilterTextView: View{
   }
 }
 
+// MARK: - Buttons
 struct ButtonLabel: View{
   let img: String
   let isSelected: Bool
@@ -39,13 +40,13 @@ struct ButtonLabel: View{
         .clipShape(Circle())
       
       Text(text)
-        .font(.system(size: 10))
+        .font(.system(size: 9))
         .foregroundColor(.gray200)
     }
   }
 }
 
-
+// MARK: - Buttons with Selection
 struct ButtonLabelWithOverlay: View {
   let img: String
   let text: String
@@ -73,6 +74,7 @@ struct ButtonLabelWithOverlay: View {
   }
 }
 
+// MARK: - CropView Grid
 struct GridCropView: View{
   var body: some View{
     return  ZStack{
