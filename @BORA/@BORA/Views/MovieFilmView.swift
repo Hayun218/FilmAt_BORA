@@ -9,10 +9,10 @@ import SwiftUI
 
 import ComposableArchitecture
 
-struct MovieFilmView: View, KeyboardReadable{
+struct MovieFilmView: View{
   
   let store: StoreOf<MovieFilmFeature>
-
+  
   @ObservedObject var viewStore: ViewStoreOf<MovieFilmFeature>
   
   public init(store: StoreOf<MovieFilmFeature>) {
@@ -20,10 +20,10 @@ struct MovieFilmView: View, KeyboardReadable{
     viewStore = ViewStore(store, observe: {$0})
     
     // font 확인
-//        for family in UIFont.familyNames.sorted() {
-//            let names = UIFont.fontNames(forFamilyName: family)
-//            print("Family: \(family) Font names: \(names)")
-//        }
+    //        for family in UIFont.familyNames.sorted() {
+    //            let names = UIFont.fontNames(forFamilyName: family)
+    //            print("Family: \(family) Font names: \(names)")
+    //        }
   }
   
   var body: some View{
@@ -76,10 +76,12 @@ struct MovieFilmView: View, KeyboardReadable{
         Spacer()
         if viewStore.isTexting == true {
           withAnimation {
-            TextField("영화 자막",
+            TextField("자막을 입력하세요",
                       text: viewStore.$textOnImg,
                       axis: .vertical)
-            .lineLimit(2)
+            .onChange(of: viewStore.$textOnImg, perform: { _ in
+              viewStore.send(.checkTextLength)
+            })
             .multilineTextAlignment(.center)
             .foregroundColor(.gray200)
           }
@@ -94,7 +96,7 @@ struct MovieFilmView: View, KeyboardReadable{
             .font(.system(size: 18))
             .background(
               Circle()
-                .fill(.white.opacity(0.6))
+                .fill(.grayButton.opacity(0.6))
                 .frame(width: 30, height: 30)
               
             )
@@ -167,8 +169,14 @@ struct MovieFilmView: View, KeyboardReadable{
       }
     }
     // 키보드 확인
-    .onReceive(keyboardPublisher) { newIsKeyboardVisible in
-      viewStore.send(.isKeyBoardAppeared(newIsKeyboardVisible))
+    .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+      viewStore.send(
+        .isKeyBoardAppeared(true))
     }
+    .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+      viewStore.send(
+        .isKeyBoardAppeared(false))
+    }
+    
   }
 }

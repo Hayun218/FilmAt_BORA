@@ -38,7 +38,7 @@ struct EditFilmView: View{
             .font(.system(size: 18))
             .background(
               Circle()
-                .fill(.white.opacity(0.6))
+                .fill(.grayButton.opacity(0.6))
                 .frame(width: 30, height: 30)
               
             )

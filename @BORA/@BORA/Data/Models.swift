@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 // MARK: - MovieView
 enum movieOpt: String, CaseIterable{
   case fontStyle = "fontStyle"

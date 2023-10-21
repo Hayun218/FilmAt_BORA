@@ -70,21 +70,22 @@ struct CropViewFeature: Reducer{
             state.offset.width = (state.offset.width - rect.minX)
             state.haptics(.medium)
           }
-          // TODO: *9/16 비율에 맞추어 Y 조절하기
-          if rect.minY < 0 {
-            
-            state.offset.height = state.offset.height - rect.minY
-            state.haptics(.medium)
-          }
+          
           if rect.maxX < rect.width {
             state.offset.width = (rect.minX - state.offset.width)
             state.haptics(.medium)
           }
-          //                  if rect.maxY > rect.height{
+          // TODO: *9/16 비율에 맞추어 Y 조절하기
+//          if rect.minY < 0 {
+//
+//            state.offset.height = state.offset.height - rect.minY
+//            state.haptics(.medium)
+//          }
+          //          if rect.maxY > rect.height{
           //
-          //                    state.offset.height = rect.maxY //(rect.maxY - state.offset.height)
-          //                    state.haptics(.medium)
-          //                  }
+          //            state.offset.height = rect.maxY //(rect.maxY - state.offset.height)
+          //            state.haptics(.medium)
+          //          }
         }
         return .none
         
