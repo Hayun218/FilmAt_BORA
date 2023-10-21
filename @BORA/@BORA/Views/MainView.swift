@@ -109,7 +109,7 @@ struct MainView: View{
             Image(systemName: viewStore.isCropEnabled ? "checkmark" : "grid")
               .background(
                 Circle()
-                  .fill(.white.opacity(0.6))
+                  .fill(.grayButton.opacity(0.6))
                   .frame(width: 30, height: 30)
                 
               )
@@ -124,7 +124,7 @@ struct MainView: View{
             Image(systemName: "seal")
               .background(
                 Circle()
-                  .fill(.white.opacity(0.6))
+                  .fill(.grayButton.opacity(0.6))
                   .frame(width: 30, height: 30)
                 
               )
@@ -191,19 +191,19 @@ struct MainView: View{
     }
     
     // MARK: - OnBoarding
-//    .overlay(content: {
-//      UserDefaults.standard.bool(forKey: "isFirst") ?
-//      OnBoardingView()
-//      : nil
-//    })
-//    
-//    .onAppear(perform: {
-//      viewStore.send(.checkFirst)
-//    })
-//    
-//    .onChange(of: UserDefaults.standard.bool(forKey: "isFirst"), perform: { _ in
-//      viewStore.send(.checkFirst)
-//    })
+    //    .overlay(content: {
+    //      UserDefaults.standard.bool(forKey: "isFirst") ?
+    //      OnBoardingView()
+    //      : nil
+    //    })
+    //    
+    //    .onAppear(perform: {
+    //      viewStore.send(.checkFirst)
+    //    })
+    //    
+    //    .onChange(of: UserDefaults.standard.bool(forKey: "isFirst"), perform: { _ in
+    //      viewStore.send(.checkFirst)
+    //    })
     
     
     
@@ -230,9 +230,6 @@ struct MainView: View{
             
             
             dismissButton: .default(Text("확인").foregroundColor(.accent100)))
-      //    dismissButton: Alert.Button.default(
-      //           Text("확인"), action: { dismiss() }
-      //       )
       
     }
     

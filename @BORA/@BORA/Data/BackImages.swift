@@ -27,12 +27,12 @@ struct BackImages{
   ]
   
   let bgLocation: [String] = [
-    "Autumn Pink Muhly",
+    "Pink Muhly",
     "SODIS",
-    "Hwangridan-gil Shop",
+    "Hwangridan-gil",
     "UHMAMOOSHI",
     "LLOW",
-    "경주 청수당",
+    "청수당",
     "LE CIEL",
     "BOSQUE"
   ]

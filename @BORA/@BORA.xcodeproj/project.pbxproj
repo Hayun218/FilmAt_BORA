@@ -15,7 +15,6 @@
 		AE43EB742AAF06FE004AE02A /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE43EB732AAF06FE004AE02A /* FilmView.swift */; };
 		AE478DAA2AD464F800A97FD9 /* CenterOriginSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE478DA92AD464F800A97FD9 /* CenterOriginSlider.swift */; };
 		AE4870F22ACDAC98000ACF5F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE4870F12ACDAC98000ACF5F /* Launch Screen.storyboard */; };
-		AE5EC4292AB8362700CF166F /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC4282AB8362700CF166F /* KeyboardReadable.swift */; };
 		AE8DF5802ADCD6AE00942957 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8DF57F2ADCD6AE00942957 /* Models.swift */; };
 		AE9412AE2ACF0AE6006D41C6 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9412AD2ACF0AE6006D41C6 /* ImageView.swift */; };
 		AE9412B02ACF1B6C006D41C6 /* ImageWithBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9412AF2ACF1B6C006D41C6 /* ImageWithBoxView.swift */; };
@@ -50,7 +49,6 @@
 		AE43EB732AAF06FE004AE02A /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		AE478DA92AD464F800A97FD9 /* CenterOriginSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterOriginSlider.swift; sourceTree = "<group>"; };
 		AE4870F12ACDAC98000ACF5F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		AE5EC4282AB8362700CF166F /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		AE7240762AB1687B0077D83E /* @BORA.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "@BORA.plist"; sourceTree = SOURCE_ROOT; };
 		AE8DF57F2ADCD6AE00942957 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		AE9412AD2ACF0AE6006D41C6 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 		AE5EC4252AB7FBEA00CF166F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AE5EC4282AB8362700CF166F /* KeyboardReadable.swift */,
 				AE2FD14B2AB97864001BC0C0 /* ImagePicker.swift */,
 				AEDF00AB2ABAEEB6009C65C3 /* ColorEx+.swift */,
 				AEDF00B62ABB57D6009C65C3 /* UIScreenEx+.swift */,
@@ -240,11 +237,12 @@
 			};
 			buildConfigurationList = AEBA393F2AAF017E00658F1A /* Build configuration list for PBXProject "@BORA" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = AEBA393B2AAF017E00658F1A;
 			packageReferences = (
@@ -287,7 +285,6 @@
 				AE2FD14C2AB97864001BC0C0 /* ImagePicker.swift in Sources */,
 				AEB333B12AB72DB20058D334 /* EditFilmFeature.swift in Sources */,
 				AEB333AF2AB608830058D334 /* EditFilmView.swift in Sources */,
-				AE5EC4292AB8362700CF166F /* KeyboardReadable.swift in Sources */,
 				AE43EB742AAF06FE004AE02A /* FilmView.swift in Sources */,
 				AEB333AD2AB607FD0058D334 /* MovieFilmView.swift in Sources */,
 				AE9412B02ACF1B6C006D41C6 /* ImageWithBoxView.swift in Sources */,
@@ -436,7 +433,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"@BORA/Preview Content\"";
 				DEVELOPMENT_TEAM = SL6KBD5WZW;
 				ENABLE_PREVIEWS = YES;
@@ -457,7 +454,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yun.Film.at.BORA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -472,7 +469,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"@BORA/Preview Content\"";
 				DEVELOPMENT_TEAM = SL6KBD5WZW;
 				ENABLE_PREVIEWS = YES;
@@ -493,7 +490,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yun.Film.at.BORA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

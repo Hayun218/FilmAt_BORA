@@ -29,10 +29,6 @@ struct MovieFilmFeature: Reducer{
     var grainStyleIndex = 0
     var grainStyle: grainStyle = .one
     
-    
-    @BindingState var grainV: Float = 0.0
-    
-    
     @BindingState var textOnImg: String = ""
     var oriTextOnImg: String = ""
     
@@ -57,13 +53,9 @@ struct MovieFilmFeature: Reducer{
       //      case nexon_bold = "NanumGothicd"
       
       case thousnd = "GyeonggiBatangROTF"
-      case thousnd_bold = "GyeonggiBatangROTB"
       case nanum = "NanumGothicOTF"
-      case nanum_bold = "NanumGothicOTFBold"
       case nexon = "WarhavenOTFR"
-      case nexon_bold = "WarhavenOTFB"
       case suite = "SUITE-Regular"
-      case suite_bold = "SUITE-Bold"
     }
     
     enum grainStyle: String {
@@ -82,11 +74,12 @@ struct MovieFilmFeature: Reducer{
     
     case textAddButtonTapped
     case isKeyBoardAppeared(Bool)
+    case checkTextLength
     case fontStyleButtonTapped
     case fontSizeButtonTapped
     case styleButtonTapped
     case grainButtonTapped
-    //    case grainSliderMoved
+    
     
     case filterApplyButtonTapped(filterStyle)
     
@@ -117,6 +110,13 @@ struct MovieFilmFeature: Reducer{
         state.isKeyboardVisible = newKeyValue
         return .none
         
+      case .checkTextLength:
+        let maxL = 100
+        if state.textOnImg.count > maxL {
+          state.textOnImg = String(state.textOnImg.prefix(maxL))
+        }
+        return .none
+        
       case .fontStyleButtonTapped:
         if state.fontTypeIndex+12 > 25 {
           state.fontTypeIndex = 0
@@ -142,16 +142,6 @@ struct MovieFilmFeature: Reducer{
           state.fontType = .plain
         } else if state.fontStyleIndex == 12 {
           state.fontType = .opacity
-          
-//          if state.selectedFont == .suite {
-//            state.selectedFont = .suite_bold
-//          }
-//          if state.selectedFont == .nanum {
-//            state.selectedFont = .nanum_bold
-//          }
-//          if state.selectedFont == .thousnd {
-//            state.selectedFont = .thousnd_bold
-//          }
         } else {
           state.fontType = .stroke
         }

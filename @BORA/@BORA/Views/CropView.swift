@@ -32,7 +32,7 @@ struct CropView: View {
     
     ZStack{
       CropImageView()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: UIScreen.screenWidth*4/3)
         .clipped()
         .contentShape(Rectangle())
       
@@ -61,9 +61,11 @@ struct CropView: View {
       
     })
     .padding([.top], 17)
-    .frame(width: UIScreen.screenWidth, height: UIScreen.screenWidth*ratio )
+    // MARK: 스크린캡쳐 비율 handle을 위해 고정 값으로 진행 => 차후 변경
+    // .frame(width: UIScreen.screenWidth, height: UIScreen.screenWidth*ratio)
+    .frame(maxWidth: .infinity, maxHeight: UIScreen.screenWidth*4/3)
     .position(x: UIScreen.main.bounds.width/2,
-              y: isLong ? UIScreen.screenHeight/3 :UIScreen.main.bounds.height/4.5)
+              y: UIScreen.screenHeight/3) //:UIScreen.main.bounds.height/4.5)
     
   }
   
@@ -73,7 +75,7 @@ struct CropView: View {
       let size = $0.size
       Image(uiImage: uiImage)
         .resizable()
-        .aspectRatio(contentMode: .fill)
+        .aspectRatio(contentMode: .fit)
       
         .overlay(content: {
           GeometryReader{ proxy in
@@ -81,9 +83,7 @@ struct CropView: View {
             
             Color.clear
               .onChange(of: isInteracting) { newValue in
-                
                 viewStore.send(.keepInBorder(rect))
-                
                 if !newValue{
                   viewStore.send(.saveOffset)
                 }
@@ -91,15 +91,14 @@ struct CropView: View {
           }
         })
         .frame(width: size.width, height: size.height)
-      
     }
     
-    //.scaleEffect(viewStore.scale)
+    .scaleEffect(viewStore.scale)
     .offset(viewStore.offset)
     
     .overlay {
       GridCropView()
-       
+      
         .frame(width: UIScreen.screenWidth,
                height: UIScreen.screenWidth*9/16)
         .coordinateSpace(name: "CROPVIEW")
@@ -114,22 +113,19 @@ struct CropView: View {
           let translation = value.translation
           
           viewStore.send(.offsetChanged(translation))
-          
-          
         })
-      
     )
     // MARK: - Scale Gesture (보류)
-    //    .gesture(MagnificationGesture()
-    //      .updating($isInteracting, body: {_, out, _ in
-    //        out = true
-    //      }).onChanged({ value in
-    //        viewStore.send(.scaleChanged(value))
-    //      })
-    //        .onEnded({ value in
-    //          viewStore.send(.scaleAdjust)
-    //        })
-    //    )
+    //        .gesture(MagnificationGesture()
+    //          .updating($isInteracting, body: {_, out, _ in
+    //            out = true
+    //          }).onChanged({ value in
+    //            viewStore.send(.scaleChanged(value))
+    //          })
+    //            .onEnded({ value in
+    //              viewStore.send(.scaleAdjust)
+    //            })
+    //        )
     .frame(width: UIScreen.screenWidth, height: UIScreen.screenWidth*ratio)
   }
 }
