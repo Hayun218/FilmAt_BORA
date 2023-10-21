@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AEBA39432AAF017E00658F1A"
-               BuildableName = "C_PurpleFilm.app"
-               BlueprintName = "C_PurpleFilm"
-               ReferencedContainer = "container:C_PurpleFilm.xcodeproj">
+               BuildableName = "@BORA.app"
+               BlueprintName = "@BORA"
+               ReferencedContainer = "container:@BORA.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AEBA39432AAF017E00658F1A"
-            BuildableName = "C_PurpleFilm.app"
-            BlueprintName = "C_PurpleFilm"
-            ReferencedContainer = "container:C_PurpleFilm.xcodeproj">
+            BuildableName = "@BORA.app"
+            BlueprintName = "@BORA"
+            ReferencedContainer = "container:@BORA.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,9 +61,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AEBA39432AAF017E00658F1A"
-            BuildableName = "C_PurpleFilm.app"
-            BlueprintName = "C_PurpleFilm"
-            ReferencedContainer = "container:C_PurpleFilm.xcodeproj">
+            BuildableName = "@BORA.app"
+            BlueprintName = "@BORA"
+            ReferencedContainer = "container:@BORA.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
